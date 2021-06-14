@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 namespace UI
@@ -11,7 +12,6 @@ namespace UI
         private AudioSource _currentTrack;
         [SerializeField]
         private AudioClip[] _playlist;
-        private bool isPlaying;
         private int _positionInPlaylist;
 
 
@@ -23,13 +23,33 @@ namespace UI
         }
 
 
-        private void Update()
+        public void PlayNextTrack()
         {
-            if (_currentTrack.time >= _currentTrack.clip.length - 1 & _positionInPlaylist <= _playlist.Length)
+            if (_positionInPlaylist < _playlist.Length - 1)
             {
                 _positionInPlaylist++;
-                _currentTrack.clip = _playlist[_positionInPlaylist];
             }
+            else
+            {
+                _positionInPlaylist = 0;
+            }
+            _currentTrack.clip = _playlist[_positionInPlaylist];
+            PlayMusic();
+        }
+
+
+        public void PlayPreviousTrack()
+        {
+            if (_positionInPlaylist == 0)
+            {
+                _positionInPlaylist = _playlist.Length - 1;
+            }
+            else
+            {
+                _positionInPlaylist--;
+            }
+            _currentTrack.clip = _playlist[_positionInPlaylist];
+            PlayMusic();
         }
 
 
