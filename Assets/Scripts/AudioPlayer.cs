@@ -23,7 +23,6 @@ namespace UI
         public void PauseMusic()
         {
             _currentTrack.Pause();
-            Debug.Log(_currentTrack.time);
         }
 
 
