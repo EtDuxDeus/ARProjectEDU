@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 
-namespace UI
+namespace Tools
 {
     public class AudioPlayer : MonoBehaviour
     {
@@ -20,6 +20,14 @@ namespace UI
             _currentTrack = GetComponent<AudioSource>();
             _positionInPlaylist = 0;
             FirstStartMusic();
+        }
+
+
+        public void ResetMusic()
+        {
+            _positionInPlaylist = 0;
+            _currentTrack.clip = _playlist[_positionInPlaylist];
+            _currentTrack.Stop();
         }
 
 
